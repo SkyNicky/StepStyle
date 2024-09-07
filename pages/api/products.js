@@ -5,6 +5,10 @@ export async function findAllProducts() {
   return Product.find().exec();
 }
 
+export async function findProductById(id) {
+  return await Product.findById(id);
+}
+
 export default async function handle(req, res) {
   await initMongoose();
   const {ids} = req.query;

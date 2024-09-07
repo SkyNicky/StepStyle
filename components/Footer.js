@@ -25,6 +25,14 @@ export default function Footer() {
           <span>Carrinho ({selectedProducts.length})</span>
         </a>
       </Link>
+      <Link href={'/contact'}>
+        <a className={(path === '/contact' ? 'text-emerald-500' : '')+" flex justify-center items-center flex-col"}>
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
+            <path strokeLinecap="round" strokeLinejoin="round" d="M21.75 21.75l-5.197-5.197M10.5 18A7.5 7.5 0 1018 10.5a7.5 7.5 0 00-7.5 7.5z" />
+          </svg>
+          <span>Contato</span>
+        </a>
+      </Link>
     </footer>
   );
 }

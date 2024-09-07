@@ -43,7 +43,7 @@ export default function CheckoutPage() {
   return (
     <Layout>
       {!productsInfos.length && (
-        <div>no products in your shopping cart</div>
+        <div>Sem produtos no carrinho</div>
       )}
       {productsInfos.length && productsInfos.map(productInfo => {
         const amount = selectedProducts.filter(id => id === productInfo._id).length;
@@ -71,27 +71,20 @@ export default function CheckoutPage() {
       )})}
       <form action="/api/checkout" method="POST">
         <div className="mt-8">
-          <input name="address" value={address} onChange={e => setAddress(e.target.value)} className="bg-gray-100 w-full rounded-lg px-4 py-2 mb-2" type="text" placeholder="Street address, number"/>
-          <input name="city" value={city} onChange={e => setCity(e.target.value)} className="bg-gray-100 w-full rounded-lg px-4 py-2 mb-2" type="text" placeholder="City and postal code"/>
-          <input name="name" value={name} onChange={e => setName(e.target.value)} className="bg-gray-100 w-full rounded-lg px-4 py-2 mb-2" type="text" placeholder="Your name"/>
-          <input name="email" value={email} onChange={e => setEmail(e.target.value)} className="bg-gray-100 w-full rounded-lg px-4 py-2 mb-2" type="email" placeholder="Email address"/>
+          <input name="address" value={address} onChange={e => setAddress(e.target.value)} className="bg-gray-100 w-full rounded-lg px-4 py-2 mb-2" type="text" placeholder="Número do endereço"/>
+          <input name="city" value={city} onChange={e => setCity(e.target.value)} className="bg-gray-100 w-full rounded-lg px-4 py-2 mb-2" type="text" placeholder="CEP"/>
+          <input name="name" value={name} onChange={e => setName(e.target.value)} className="bg-gray-100 w-full rounded-lg px-4 py-2 mb-2" type="text" placeholder="Seu nome"/>
+          <input name="email" value={email} onChange={e => setEmail(e.target.value)} className="bg-gray-100 w-full rounded-lg px-4 py-2 mb-2" type="email" placeholder="Email"/>
         </div>
         <div className="mt-8">
-          <div className="flex my-3">
-            <h3 className="grow font-bold text-gray-400">Subtotal:</h3>
-            <h3 className="font-bold">R${subtotal}</h3>
-          </div>
-          <div className="flex my-3">
-            <h3 className="grow font-bold text-gray-400">Delivery:</h3>
-            <h3 className="font-bold">R${deliveryPrice.toFixed(2)}</h3>  {/* Apenas para consistência, mas 0 será sempre 0.00 */}
-          </div>
+
           <div className="flex my-3 border-t pt-3 border-dashed border-emerald-500">
             <h3 className="grow font-bold text-gray-400">Total:</h3>
             <h3 className="font-bold">R${total}</h3>
           </div>
         </div>
         <input type="hidden" name="products" value={selectedProducts.join(',')}/>
-        <button type="submit" className="bg-emerald-500 px-5 py-2 rounded-xl font-bold text-white w-full my-4 shadow-emerald-300 shadow-lg">Pay R${total}</button>
+        <button type="submit" className="bg-emerald-500 px-5 py-2 rounded-xl font-bold text-white w-full my-4 shadow-emerald-300 shadow-lg">Pagar R${total}</button>
       </form>
     </Layout>
   );
