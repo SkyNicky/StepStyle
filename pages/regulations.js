@@ -33,7 +33,7 @@ export default function Regulations() {
         <p>
           O site não se responsabiliza por quaisquer danos diretos, indiretos ou
           consequenciais que possam resultar do uso das informações ou recursos
-          disponíveis. As informações são fornecidas "como estão" e podem não
+          disponíveis. As informações são fornecidas &quot;como estão&quot; e podem não
           estar atualizadas ou serem imprecisas.
         </p>
         <h2 className="text-xl font-semibold mt-6 mb-2">Contato</h2>
