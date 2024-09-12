@@ -7,7 +7,6 @@ export default function PrivacyPolicy() {
         <p>
           Este site educacional foi desenvolvido para fins de aprendizado e prática de programação. Não coletamos ou armazenamos dados pessoais de usuários. Todo conteúdo aqui é para fins de demonstração e não deve ser utilizado para transações comerciais reais.
         </p>
-        {/* Adicione mais informações conforme necessário */}
       </div>
       <Layout />
       </>

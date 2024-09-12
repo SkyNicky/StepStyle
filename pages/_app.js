@@ -6,17 +6,17 @@ import { DarkModeProvider } from '../components/DarkModeContext';
 import ChatraWidget from '../components/ChatraWidget';
 import Head from 'next/head';
 
+// Componente principal que envolve todas as páginas
 function MyApp({ Component, pageProps }) {
   return (
-    <DarkModeProvider>
-      <ProductsContextProvider>
-        <ChatraWidget />
+    <DarkModeProvider> {/* Provedor para o modo escuro */}
+      <ProductsContextProvider> {/* Provedor para o contexto dos produtos */}
+        <ChatraWidget /> {/* Widget de chat */}
         <Head>
-          <title>StepStyle</title>
-          <link rel="icon" href="/Step Style.png" />
-          {/* Outros elementos que você queira adicionar no <head> */}
+          <title>StepStyle</title> {/* Título da página */}
+          <link rel="icon" href="/Step Style.png" /> {/* Favicon */}
         </Head>
-        <Component {...pageProps} />
+        <Component {...pageProps} /> {/* Componente da página específica */}
       </ProductsContextProvider>
     </DarkModeProvider>
   );

@@ -11,7 +11,6 @@ export default function FAQ() {
           <li>Este site é real? Não, este é um site educacional.</li>
           <li>Posso fazer compras? Não, este site é para prática de programação.</li>
           <li>O sistema de pagamento funciona?Sim porém não leva a um pedido real pois é um site fictício</li>
-          {/* Adicione mais perguntas conforme necessário */}
         </ul>
       </div>
       <Layout />

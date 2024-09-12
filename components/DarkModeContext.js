@@ -1,27 +1,27 @@
 import { createContext, useState, useEffect } from "react";
 
-export const DarkModeContext = createContext();
+export const DarkModeContext = createContext(); // Criação do contexto para o modo escuro.
 
 export function DarkModeProvider({ children }) {
-  const [darkMode, setDarkMode] = useState(false);
+  const [darkMode, setDarkMode] = useState(false); // Estado inicial do modo escuro, definido como falso (modo claro).
 
   useEffect(() => {
-    // Define o modo escuro baseado na preferência do usuário ou no estado armazenado
+    // Quando o componente é montado, verifica se o modo escuro está salvo no localStorage.
     const savedMode = localStorage.getItem("darkMode") === "true";
-    setDarkMode(savedMode);
-    document.documentElement.classList.toggle("dark", savedMode);
+    setDarkMode(savedMode); // Define o estado do modo escuro conforme a preferência salva.
+    document.documentElement.classList.toggle("dark", savedMode); // Adiciona ou remove a classe 'dark' no elemento raiz (HTML) para aplicar o modo escuro.
   }, []);
 
   const toggleDarkMode = () => {
-    const newMode = !darkMode;
-    setDarkMode(newMode);
-    document.documentElement.classList.toggle("dark", newMode);
-    localStorage.setItem("darkMode", newMode); // Salva a preferência do usuário
+    const newMode = !darkMode; // Inverte o estado do modo escuro.
+    setDarkMode(newMode); // Atualiza o estado do modo escuro.
+    document.documentElement.classList.toggle("dark", newMode); // Alterna a classe 'dark' no HTML para refletir a mudança.
+    localStorage.setItem("darkMode", newMode); // Salva a nova preferência no localStorage.
   };
 
   return (
     <DarkModeContext.Provider value={{ darkMode, toggleDarkMode }}>
-      {children}
+      {children} {/* Renderiza os componentes filhos, permitindo que acessem o contexto. */}
     </DarkModeContext.Provider>
   );
 }
