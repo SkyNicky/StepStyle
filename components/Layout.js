@@ -17,7 +17,7 @@ export default function Layout({ children }) {
       setDarkMode(true);
       document.body.classList.add('dark');
     }
-  }, []);
+  }, [setSelectedProducts]);
 
   const toggleDarkMode = () => {
     setDarkMode(!darkMode);
@@ -28,8 +28,6 @@ export default function Layout({ children }) {
   return (
     
     <div>
-       <title>StepStyle</title>
-       <link rel="icon" src="./public/Step Style.png"/>
       <div className="p-5">
         {success && (
           <div className="mb-5 bg-green-400 text-white text-lg p-5 rounded-xl">
