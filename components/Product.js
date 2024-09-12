@@ -1,6 +1,7 @@
 import { useContext } from "react";
 import { ProductsContext } from "./ProductsContext";
 import { useRouter } from "next/router";
+import Image from 'next/image'
 
 export default function Product({_id, name, price, description, picture}) {
   const { setSelectedProducts } = useContext(ProductsContext);
@@ -27,7 +28,7 @@ export default function Product({_id, name, price, description, picture}) {
     <div className="w-52 cursor-pointer">
       {/* Apenas a imagem e o nome redirecionam para a página do produto */}
       <div className="bg-blue-100 p-5 rounded-xl" onClick={goToProductPage}>
-        <img src={picture} alt={name} />
+        <Image src={picture} alt={name} />
       </div>
       <div className="mt-2" onClick={goToProductPage}>
         <h3 className="font-bold text-lg">

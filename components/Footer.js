@@ -3,6 +3,7 @@ import { useRouter } from "next/router";
 import { useContext } from "react";
 import { ProductsContext } from "./ProductsContext";
 import { DarkModeContext } from "../components/DarkModeContext"; // Importa o contexto do Dark Mode
+import Image from 'next/image'
 
 export default function Footer() {
   const router = useRouter();
@@ -31,7 +32,7 @@ export default function Footer() {
           </a>
         </Link>
         <div onClick={toggleDarkMode} className="cursor-pointer flex justify-center items-center flex-col">
-          <img src="/night-mode.png" alt="Toggle Dark Mode" className="w-6 h-6" />
+          <Image src="/night-mode.png" alt="Toggle Dark Mode" className="w-6 h-6" />
           <span>{darkMode ? 'Modo Claro' : 'Modo Escuro'}</span>
         </div>
       </div>

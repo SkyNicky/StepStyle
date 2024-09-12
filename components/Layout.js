@@ -39,7 +39,6 @@ export default function Layout({ children }) {
         {children}
       </div>
       <Footer toggleDarkMode={toggleDarkMode} />
-      
     </div>
   );
 }

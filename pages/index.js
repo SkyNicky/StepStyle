@@ -5,6 +5,7 @@ import { findAllProducts } from "./api/products";
 import Layout from "../components/Layout";
 import Slider from "react-slick";
 import Link from "next/link"; // Importando o Link do Next.js
+import Image from "next/image"
 
 export default function Home({ products }) {
   const [phrase, setPhrase] = useState('');
@@ -53,7 +54,7 @@ export default function Home({ products }) {
       </div>
 
       <div className="relative mb-8 flex items-center justify-center">
-        <img 
+        <Image 
           src="/Step Style.png" 
           alt="Banner" 
           className="w-1rem max-w-1rem h-auto object-cover rounded-lg shadow-md"
