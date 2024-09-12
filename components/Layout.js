@@ -1,18 +1,35 @@
 import Footer from "./Footer";
-import {useContext, useEffect, useState} from "react";
-import {ProductsContext} from "./ProductsContext";
+import { useContext, useEffect, useState } from "react";
+import { ProductsContext } from "./ProductsContext";
 
-export default function Layout({children}) {
-  const {setSelectedProducts} = useContext(ProductsContext);
-  const [success,setSuccess] = useState(false);
+export default function Layout({ children }) {
+  const { setSelectedProducts } = useContext(ProductsContext);
+  const [success, setSuccess] = useState(false);
+  const [darkMode, setDarkMode] = useState(false);
+
   useEffect(() => {
     if (window.location.href.includes('success')) {
       setSelectedProducts([]);
       setSuccess(true);
     }
+    // Check local storage for dark mode setting
+    if (localStorage.getItem('darkMode') === 'true') {
+      setDarkMode(true);
+      document.body.classList.add('dark');
+    }
   }, []);
+
+  const toggleDarkMode = () => {
+    setDarkMode(!darkMode);
+    document.body.classList.toggle('dark');
+    localStorage.setItem('darkMode', !darkMode);
+  };
+
   return (
+    
     <div>
+       <title>StepStyle</title>
+       <link rel="icon" src="./public/Step Style.png"/>
       <div className="p-5">
         {success && (
           <div className="mb-5 bg-green-400 text-white text-lg p-5 rounded-xl">
@@ -21,7 +38,8 @@ export default function Layout({children}) {
         )}
         {children}
       </div>
-      <Footer />
+      <Footer toggleDarkMode={toggleDarkMode} />
+      
     </div>
   );
 }

@@ -17,18 +17,18 @@ export default async function handler(req,res) {
   const products = await Product.find({_id:{$in:uniqIds}}).exec();
 
   let line_items = [];
-for (let productId of uniqIds) {
-  const quantity = productsIds.filter(id => id === productId).length;
-  const product = products.find(p => p._id.toString() === productId);
-  line_items.push({
-    quantity,
-    price_data: {
-      currency: 'BRL',  // Alterado para BRL
-      product_data: {name: product.name},
-      unit_amount: Math.round(product.price * 100),  // O preço deve estar em centavos
-    },
-  });
-}
+  for (let productId of uniqIds) {
+    const quantity = productsIds.filter(id => id === productId).length;
+    const product = products.find(p => p._id.toString() === productId);
+    line_items.push({
+      quantity,
+      price_data: {
+        currency: 'BRL',
+        product_data: {name:product.name},
+        unit_amount: product.price * 100,
+      },
+    });
+  }
 
   const order = await Order.create({
     products:line_items,

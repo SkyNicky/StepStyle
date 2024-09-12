@@ -1,3 +1,47 @@
+/* Importa as configurações base do Tailwind CSS, que inclui um reset de estilos e uma normalização para garantir consistência entre navegadores */
 @tailwind base;
+
+/* Importa os componentes do Tailwind CSS, que são classes utilitárias para construir layouts e componentes reutilizáveis */
 @tailwind components;
+
+/* Importa as utilidades do Tailwind CSS, que incluem classes de estilização e responsividade */
 @tailwind utilities;
+
+/* Importa a fonte 'Merriweather' do Google Fonts, com diferentes pesos (300, 400, 700) */
+@import url('https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;700&display=swap');
+
+/* Define a fonte global da aplicação como 'Merriweather' para todos os textos dentro do body */
+body {
+  font-family: 'Merriweather', serif;
+  background-color: white;
+  color: black;
+}
+
+.dark body{
+  background-color: #1a202c; /* Dark background */
+  color: white;
+}
+
+.dark .bg-gray-800 {
+  background-color: #2d3748;
+}
+.dark .text-gray-700{
+  color:white
+}
+
+/* Oculta a barra de rolagem padrão em navegadores baseados em WebKit (Chrome, Safari) */
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+/* Oculta a barra de rolagem em navegadores como IE, Edge, e Firefox */
+.scrollbar-hide {
+  -ms-overflow-style: none;  /* Internet Explorer e Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+.slick-next:before {
+  content: ' '!important;
+}
+.slick-prev:before {
+  content: ' '!important;
+}

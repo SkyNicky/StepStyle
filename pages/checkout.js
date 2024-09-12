@@ -29,7 +29,7 @@ export default function CheckoutPage() {
     }
   }
 
-  const deliveryPrice = 0;
+  const deliveryPrice = 5;
   let subtotal = 0;
   if (selectedProducts?.length) {
     for (let id of selectedProducts) {
@@ -37,13 +37,12 @@ export default function CheckoutPage() {
       subtotal += price;
     }
   }
-  subtotal = subtotal.toFixed(2);  // Formata o subtotal para duas casas decimais
-  const total = (parseFloat(subtotal) + deliveryPrice).toFixed(2);  // Formata o total para duas casas decimais
+  const total = subtotal + deliveryPrice;
 
   return (
     <Layout>
       {!productsInfos.length && (
-        <div>Sem produtos no carrinho</div>
+        <div>no products in your shopping cart</div>
       )}
       {productsInfos.length && productsInfos.map(productInfo => {
         const amount = selectedProducts.filter(id => id === productInfo._id).length;
@@ -55,9 +54,8 @@ export default function CheckoutPage() {
           </div>
           <div className="pl-4 items-center">
             <h3 className="font-bold text-lg">{productInfo.name}</h3>
-            <p className="text-sm leading-4 text-gray-500">{productInfo.description}</p>
             <div className="flex mt-1">
-              <div className="grow font-bold">R${productInfo.price.toFixed(2)}</div>
+              <div className="grow font-bold">${productInfo.price}</div>
               <div>
                 <button onClick={() => lessOfThisProduct(productInfo._id)} className="border border-emerald-500 px-2 rounded-lg text-emerald-500">-</button>
                 <span className="px-2">
@@ -71,20 +69,27 @@ export default function CheckoutPage() {
       )})}
       <form action="/api/checkout" method="POST">
         <div className="mt-8">
-          <input name="address" value={address} onChange={e => setAddress(e.target.value)} className="bg-gray-100 w-full rounded-lg px-4 py-2 mb-2" type="text" placeholder="Número do endereço"/>
+          <input name="address" value={address} onChange={e => setAddress(e.target.value)} className="bg-gray-100 w-full rounded-lg px-4 py-2 mb-2" type="text" placeholder="Número da Residência"/>
           <input name="city" value={city} onChange={e => setCity(e.target.value)} className="bg-gray-100 w-full rounded-lg px-4 py-2 mb-2" type="text" placeholder="CEP"/>
-          <input name="name" value={name} onChange={e => setName(e.target.value)} className="bg-gray-100 w-full rounded-lg px-4 py-2 mb-2" type="text" placeholder="Seu nome"/>
+          <input name="name" value={name} onChange={e => setName(e.target.value)} className="bg-gray-100 w-full rounded-lg px-4 py-2 mb-2" type="text" placeholder="Nome"/>
           <input name="email" value={email} onChange={e => setEmail(e.target.value)} className="bg-gray-100 w-full rounded-lg px-4 py-2 mb-2" type="email" placeholder="Email"/>
         </div>
         <div className="mt-8">
-
+          <div className="flex my-3">
+            <h3 className="grow font-bold text-gray-400">Subtotal:</h3>
+            <h3 className="font-bold">R${subtotal}</h3>
+          </div>
+          <div className="flex my-3">
+            <h3 className="grow font-bold text-gray-400">Entrega:</h3>
+            <h3 className="font-bold">R${deliveryPrice}</h3>
+          </div>
           <div className="flex my-3 border-t pt-3 border-dashed border-emerald-500">
             <h3 className="grow font-bold text-gray-400">Total:</h3>
             <h3 className="font-bold">R${total}</h3>
           </div>
         </div>
         <input type="hidden" name="products" value={selectedProducts.join(',')}/>
-        <button type="submit" className="bg-emerald-500 px-5 py-2 rounded-xl font-bold text-white w-full my-4 shadow-emerald-300 shadow-lg">Pagar R${total}</button>
+        <button type="submit" className="bg-emerald-500 px-5 py-2 rounded-xl font-bold text-white w-full my-4 shadow-emerald-300 shadow-lg">Finalizar Compra R${total}</button>
       </form>
     </Layout>
   );
