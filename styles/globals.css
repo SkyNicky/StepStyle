@@ -13,25 +13,29 @@
 /* Define a fonte global da aplicação como 'Merriweather' para todos os textos dentro do body */
 body {
   font-family: 'Merriweather', serif;
-  background-color: white;
-  color: black;
+  background-color: white;/* Define a cor de fundo padrão como branca */
+  color: black;/* Define a cor do texto padrão como preta */
 }
 
+/* Define estilos para o tema escuro. Quando a classe 'dark' é aplicada ao elemento body, as seguintes regras são usadas. */
 .dark body{
   background-color: #1a202c; /* Dark background */
-  color: white;
+  color: white;/* Define a cor do texto padrão como branca */
 }
 
+/* Define o fundo da classe 'bg-gray-800' para um tom mais escuro de cinza no tema escuro. */
 .dark .bg-gray-800 {
   background-color: #2d3748;
 }
+
+/* Define a cor do texto da classe 'text-gray-700' para branca no tema escuro. */
 .dark .text-gray-700{
   color:white
 }
 
 /* Oculta a barra de rolagem padrão em navegadores baseados em WebKit (Chrome, Safari) */
 .scrollbar-hide::-webkit-scrollbar {
-  display: none;
+  display: none;/* Oculta a barra de rolagem no WebKit */
 }
 
 /* Oculta a barra de rolagem em navegadores como IE, Edge, e Firefox */
@@ -39,9 +43,11 @@ body {
   -ms-overflow-style: none;  /* Internet Explorer e Edge */
   scrollbar-width: none;  /* Firefox */
 }
+
+/* Ajusta o conteúdo dos botões de navegação do Slick Slider para garantir que eles não mostrem nada, resolvendo problemas visuais. */
 .slick-next:before {
-  content: ' '!important;
+  content: ' '!important; /* Define o conteúdo como um espaço vazio e garante que o estilo seja aplicado */
 }
 .slick-prev:before {
-  content: ' '!important;
+  content: ' '!important; /* Define o conteúdo como um espaço vazio e garante que o estilo seja aplicado */
 }
