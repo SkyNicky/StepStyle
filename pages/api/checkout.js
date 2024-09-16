@@ -11,12 +11,6 @@ export default async function handler(req, res) {
   // Inicializa a conexão com o banco de dados MongoDB
   await initMongoose();
 
-  // Verifica se o método HTTP da requisição é POST, caso contrário retorna uma mensagem de erro
-  if (req.method !== 'POST') {
-    res.json('should be a POST but it is not!');
-    return;
-  }
-
   // Extrai dados do corpo da requisição
   const { email, name, address, city } = req.body;
   // Obtém os IDs dos produtos enviados na requisição e remove duplicatas
@@ -73,14 +67,14 @@ export default async function handler(req, res) {
   });
 
   // Cria uma sessão de checkout no Stripe
-  const session = await stripe.checkout.sessions.create({
-    line_items, // Itens da linha para o checkout
-    mode: 'payment', // Modo de pagamento
-    customer_email: email, // Email do cliente
-    success_url: `${req.headers.origin}/?success=true`, // URL de sucesso após o pagamento
-    cancel_url: `${req.headers.origin}/?canceled=true`, // URL de cancelamento se o pagamento falhar
-    metadata: { orderId: order._id.toString() }, // Metadados com o ID do pedido
-  });
+const session = await stripe.checkout.sessions.create({
+  line_items, // Itens da linha para o checkout
+  mode: 'payment', // Modo de pagamento
+  customer_email: email, // Email do cliente
+  success_url: `${req.headers.origin}/payment-status?status=success`, // URL de sucesso após o pagamento
+  cancel_url: `${req.headers.origin}/payment-status?status=canceled`, // URL de cancelamento se o pagamento falhar
+  metadata: { orderId: order._id.toString() }, // Metadados com o ID do pedido
+});
 
   // Redireciona o cliente para a URL da sessão de checkout do Stripe
   res.redirect(303, session.url);

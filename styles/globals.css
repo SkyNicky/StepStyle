@@ -51,3 +51,17 @@ body {
 .slick-prev:before {
   content: ' '!important; /* Define o conteúdo como um espaço vazio e garante que o estilo seja aplicado */
 }
+/* styles/globals.css */
+.custom-swal-button {
+  background-color: #2c3e50 !important; /* Cor de fundo mais escura */
+  color: #ecf0f1 !important; /* Cor da fonte mais clara */
+  border: none !important; /* Remove a borda padrão */
+  padding: 10px 20px !important; /* Ajusta o padding */
+  font-size: 16px !important; /* Ajusta o tamanho da fonte */
+  border-radius: 5px !important; /* Adiciona bordas arredondadas */
+  cursor: pointer !important; /* Adiciona o ponteiro do cursor */
+}
+
+.custom-swal-button:hover {
+  background-color: #34495e !important; /* Cor de fundo ao passar o mouse */
+}

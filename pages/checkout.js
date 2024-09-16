@@ -1,9 +1,11 @@
-// Importa o componente Layout para a estrutura da página
-import Layout from "../components/Layout";
-// Importa hooks do React para gerenciar estado e efeitos colaterais
-import { useContext, useEffect, useState } from "react";
-// Importa o contexto que contém os produtos selecionados
-import { ProductsContext } from "../components/ProductsContext";
+// Importa o SweetAlert2
+import Swal from 'sweetalert2';
+
+import Layout from '../components/Layout';
+
+import { ProductsContext } from '../components/ProductsContext';
+
+import { useContext, useEffect, useState } from 'react';
 
 export default function CheckoutPage() {
   // Obtém o contexto dos produtos selecionados e a função para atualizar a seleção
@@ -54,6 +56,22 @@ export default function CheckoutPage() {
   const formattedSubtotal = subtotal.toFixed(2);
   const total = (subtotal + deliveryPrice).toFixed(2);
 
+  // Função para verificar e alertar se o carrinho estiver vazio
+  function handleCheckout(event) {
+    if (selectedProducts.length === 0) {
+      // Evita que o formulário seja enviado
+      event.preventDefault();
+      // Exibe o alerta usando SweetAlert2
+      Swal.fire({
+        icon: 'warning',
+        title: 'Carrinho Vazio',
+        text: 'Por favor, adicione algo ao carrinho antes de finalizar a compra.',
+        confirmButtonColor: '#3085d6',
+        confirmButtonText: 'OK'
+      });
+    }
+  }
+
   return (
     <Layout>
       {/* Exibe uma mensagem se não houver produtos selecionados */}
@@ -86,7 +104,7 @@ export default function CheckoutPage() {
           </div>
         )
       })}
-      <form action="/api/checkout" method="POST">
+      <form action="/api/checkout" method="POST" onSubmit={handleCheckout}>
         <div className="mt-8">
           {/* Campos de entrada para endereço, cidade, nome e email */}
           <input name="address" value={address} onChange={e => setAddress(e.target.value)} className="bg-gray-100 w-full rounded-lg px-4 py-2 mb-2" type="text" placeholder="Número da Residência" />
