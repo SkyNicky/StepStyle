@@ -2,6 +2,8 @@
 import Layout from "../components/Layout";
 // Importa o hook useState do React para gerenciar o estado dos campos do formulário
 import { useState } from "react";
+// Importa o SweetAlert2
+import Swal from 'sweetalert2';
 
 export default function ContactPage() {
   // Cria estados para armazenar o nome, email e detalhes do pedido
@@ -12,8 +14,13 @@ export default function ContactPage() {
   // Função para lidar com o envio do formulário
   const handleSubmit = (e) => {
     e.preventDefault(); // Impede o comportamento padrão de envio do formulário
-    // Exibe um alerta indicando que o formulário foi enviado
-    alert('Formulário Enviado!');
+    // Exibe um alerta SweetAlert indicando que o formulário foi enviado
+    Swal.fire({
+      title: 'Formulário Enviado!',
+      text: 'Obrigado por entrar em contato.',
+      icon: 'success',
+      confirmButtonText: 'Ok'
+    });
   };
 
   return (
