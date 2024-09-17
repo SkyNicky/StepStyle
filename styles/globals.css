@@ -12,7 +12,7 @@
 
 /* Define a fonte global da aplicação como 'Merriweather' para todos os textos dentro do body */
 body {
-  font-family: 'Merriweather', serif;
+  font-family: 'Merriweather', serif!important;
   background-color: white;/* Define a cor de fundo padrão como branca */
   color: black;/* Define a cor do texto padrão como preta */
 }

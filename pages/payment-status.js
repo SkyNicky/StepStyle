@@ -1,10 +1,12 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useContext } from 'react';
 import Swal from 'sweetalert2';
 import { useRouter } from 'next/router';
+import { ProductsContext } from '../components/ProductsContext'; // Certifique-se de ajustar o caminho conforme necessário
 
 const PaymentStatus = () => {
   const router = useRouter();
   const { status } = router.query; // Obtém o status da query string
+  const { setSelectedProducts } = useContext(ProductsContext); // Obtém a função para atualizar o carrinho
 
   useEffect(() => {
     if (status) {
@@ -19,6 +21,7 @@ const PaymentStatus = () => {
             confirmButton: 'custom-swal-button', // Adiciona uma classe personalizada ao botão
           },
         }).then(() => {
+          setSelectedProducts([]); // Limpa o carrinho
           router.push('/'); // Redireciona para a página inicial
         });
       } else if (status === 'canceled') {
@@ -35,7 +38,7 @@ const PaymentStatus = () => {
         });
       }
     }
-  }, [status, router]);
+  }, [status, router, setSelectedProducts]);
 
   return null; // Não precisa renderizar nada, o SweetAlert lida com a interface do usuário
 };
