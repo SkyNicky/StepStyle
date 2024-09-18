@@ -2,7 +2,6 @@
 import Swal from 'sweetalert2';
 
 import Layout from '../components/Layout';
-
 import { ProductsContext } from '../components/ProductsContext';
 
 import { useContext, useEffect, useState } from 'react';
@@ -58,10 +57,37 @@ export default function CheckoutPage() {
 
   // Função para verificar e alertar se o carrinho estiver vazio
   function handleCheckout(event) {
-    if (selectedProducts.length === 0) {
-      // Evita que o formulário seja enviado
+    // Validação do CEP
+    const cepPattern = /^\d{5}-\d{3}$/;
+    if (!cepPattern.test(city)) {
       event.preventDefault();
-      // Exibe o alerta usando SweetAlert2
+      Swal.fire({
+        icon: 'error',
+        title: 'CEP Inválido',
+        text: 'Por favor, insira o CEP no formato correto (#####-###).',
+        confirmButtonColor: '#3085d6',
+        confirmButtonText: 'OK'
+      });
+      return;
+    }
+
+    // Validação do Email
+    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailPattern.test(email)) {
+      event.preventDefault();
+      Swal.fire({
+        icon: 'error',
+        title: 'Email Inválido',
+        text: 'Por favor, insira um email válido que contenha "@" e ".com".',
+        confirmButtonColor: '#3085d6',
+        confirmButtonText: 'OK'
+      });
+      return;
+    }
+
+    // Verifica se o carrinho está vazio
+    if (selectedProducts.length === 0) {
+      event.preventDefault();
       Swal.fire({
         icon: 'warning',
         title: 'Carrinho Vazio',
@@ -69,6 +95,18 @@ export default function CheckoutPage() {
         confirmButtonColor: '#3085d6',
         confirmButtonText: 'OK'
       });
+    }
+  }
+
+  // Função para formatar o CEP enquanto o usuário digita
+  function handleCityChange(e) {
+    const value = e.target.value.replace(/\D/g, ''); // Remove caracteres não numéricos
+    if (value.length <= 5) {
+      setCity(value);
+    } else if (value.length <= 8) {
+      setCity(`${value.slice(0, 5)}-${value.slice(5)}`);
+    } else {
+      setCity(`${value.slice(0, 5)}-${value.slice(5, 8)}`);
     }
   }
 
@@ -108,7 +146,7 @@ export default function CheckoutPage() {
         <div className="mt-8">
           {/* Campos de entrada para endereço, cidade, nome e email */}
           <input name="address" value={address} onChange={e => setAddress(e.target.value)} className="bg-gray-100 w-full rounded-lg px-4 py-2 mb-2" type="text" placeholder="Número da Residência" />
-          <input name="city" value={city} onChange={e => setCity(e.target.value)} className="bg-gray-100 w-full rounded-lg px-4 py-2 mb-2" type="text" placeholder="CEP" />
+          <input name="city" value={city} onChange={handleCityChange} className="bg-gray-100 w-full rounded-lg px-4 py-2 mb-2" type="text" placeholder="CEP" />
           <input name="name" value={name} onChange={e => setName(e.target.value)} className="bg-gray-100 w-full rounded-lg px-4 py-2 mb-2" type="text" placeholder="Nome" />
           <input name="email" value={email} onChange={e => setEmail(e.target.value)} className="bg-gray-100 w-full rounded-lg px-4 py-2 mb-2" type="email" placeholder="Email" />
         </div>
